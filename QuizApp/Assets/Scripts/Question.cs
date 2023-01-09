@@ -26,6 +26,7 @@ public class Question
     q1.choices.Add("Hanoi");
     q1.category = "Geography";
     q1.correctAnswerid = 2;
+    questions.Add(q1);
 
     Question q2 = new Question();
     q2.id = "2";
@@ -36,6 +37,7 @@ public class Question
     q2.choices.Add("64");
     q2.category = "Trivia";
     q2.correctAnswerid = 3;
+    questions.Add(q2);
 
     Question q3 = new Question();
     q3.id = "3";
@@ -46,6 +48,7 @@ public class Question
     q3.choices.Add("11");
     q3.category = "Math";
     q3.correctAnswerid = 0;
+    questions.Add(q3);
 
     Question q4 = new Question();
     q4.id = "4";
@@ -56,6 +59,7 @@ public class Question
     q4.choices.Add("Spiderman");
     q4.category = "Trivia";
     q4.correctAnswerid = 1;
+    questions.Add(q4);
 
     Question q5 = new Question();
     q5.id = "5";
@@ -66,6 +70,7 @@ public class Question
     q5.choices.Add("Jane Austen");
     q5.category = "Trivia";
     q5.correctAnswerid = 3;
+    questions.Add(q5);
 
     return questions;
   }

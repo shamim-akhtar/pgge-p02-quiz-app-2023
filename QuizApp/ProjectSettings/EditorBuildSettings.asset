@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/_preload.unity
+    guid: 3a2808fd20b345e478cc263ded806453
+  - enabled: 1
     path: Assets/Scenes/PreQuiz.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Quiz.unity
+    guid: 17c3e3ae4e3c0b044bca2b1c2acf04c3
+  - enabled: 1
+    path: Assets/Scenes/PostQuiz.unity
+    guid: aa19512b56208954ba01df67032c092d
   m_configObjects: {}
