@@ -11,8 +11,15 @@ public class PostQuiz : MonoBehaviour
   [SerializeField]
   Text _levelText;
 
+  private void Start()
+  {
+    _totalScoreText.text = GameApp.Instance.user.score.ToString();
+    _levelText.text = GameApp.Instance.user.level.ToString();
+  }
+
   public void OnClickPlay()
   {
+
     SceneManager.LoadScene("Quiz");
   }
 }

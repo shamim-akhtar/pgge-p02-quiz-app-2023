@@ -48,6 +48,13 @@ public class QuizManager : MonoBehaviour
 
   IEnumerator _countdownTimerCoroutine;
 
+  List<Response> _responses = new List<Response>();
+
+  Response _response = new Response();
+
+  float _startTime;
+  float _endTime;
+
   // Start is called before the first frame update
   void Start()
   {
@@ -68,6 +75,8 @@ public class QuizManager : MonoBehaviour
       // go to the post quiz using SceneManager Loadscene..
       return;
     }
+
+    _response = new Response();
     _panelTimeUp.gameObject.SetActive(false);
     _panelQuiz.gameObject.SetActive(true);
     _panelInCorrectAnswer.gameObject.SetActive(false);
@@ -93,6 +102,9 @@ public class QuizManager : MonoBehaviour
 
     _countdownTimerCoroutine = Coroutine_CountdownTimer(maxAllowableTime);
     StartCoroutine(_countdownTimerCoroutine);
+
+    _startTime = Time.time;
+
   }
 
   IEnumerator Coroutine_CountdownTimer(float t)
@@ -112,6 +124,8 @@ public class QuizManager : MonoBehaviour
     _panelInCorrectAnswer.gameObject.SetActive(false);
     _panelCorrectAnswer.gameObject.SetActive(false);
     _nextButton.gameObject.SetActive(true);
+
+    _response.responseType = ResponseType.NOT_ATTEMPTED;
   }
 
   // Update is called once per frame
@@ -133,12 +147,17 @@ public class QuizManager : MonoBehaviour
       // correct answer.
       int score = 100;
       ShowCorrectAnswerScreen(score);
+      _response.responseType = ResponseType.CORRECT;
     }
     else
     {
       // Incorrect answer.
       ShowIncorrectAnswerScreen();
+      _response.responseType = ResponseType.INCORRECT;
     }
+    _endTime = Time.time;
+    _response.time = _endTime - _startTime;
+    _responses.Add(_response);
   }
 
   void ShowCorrectAnswerScreen(int score)
@@ -205,6 +224,13 @@ public class QuizManager : MonoBehaviour
     _currentIndex += 1;
     if(_currentIndex == _questions.Count)
     {
+      // Save the user data.
+      GameApp.Instance.user.score += _totalScore;
+      GameApp.Instance.user.level += 1;
+      GameApp.Instance.SaveUserData();
+
+      GameApp.Instance.SaveResponses(_responses);
+
       // finished quiz.
       SceneManager.LoadScene("PostQuiz");
       return;
